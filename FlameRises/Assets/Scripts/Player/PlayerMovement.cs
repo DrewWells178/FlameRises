@@ -13,10 +13,18 @@ public class PlayerMovement : MonoBehaviour
     float inputHorizontal;
 
     // Jumping Variables
-    public float jumpForce = 15f;
+    private float jumpForce = 30f;
 
     // Running Variables
     public float runSpeed = 5f;
+
+    // Wall jumping variables
+    float wallJumpingDirection;
+    bool isWallJumping;
+    float wallJumpingDuration = .3f;
+    float wallJumpingCounter;
+    float wallJumpingTime = .2f;
+    Vector2 wallJumpingPower = new Vector2(12f, 24f);
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         KBM_Run();
         KBM_Jump();
         KBM_WallSliding();
+        KBM_WallJumping();
     }
 
     void KBM_Run()
@@ -61,9 +70,46 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isGrounded() && isSliding())
         {
-            Debug.Log("Should Be Slow");
             rb.velocity = new Vector2(rb.velocity.x, -.9f);           
         }        
+    }
+
+    
+    void KBM_WallJumping()
+    {
+        if(isSliding())
+        {
+            isWallJumping = false;
+            if(isWallLeft())
+            {
+                wallJumpingDirection = 1f;
+            }
+            else
+            {
+                wallJumpingDirection = -1f;
+            }
+            wallJumpingCounter = wallJumpingTime;
+
+            CancelInvoke(nameof(StopWallJumping));
+        }
+        else
+        {
+            wallJumpingCounter -= Time.deltaTime;
+        }
+
+        if(Input.GetKeyDown("space") && wallJumpingCounter > 0f)
+        {
+            isWallJumping = true;
+            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            wallJumpingCounter = 0f;
+
+            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+        }
+    }
+
+    private void StopWallJumping()
+    {
+        isWallJumping = false;
     }
 
     bool isGrounded()
