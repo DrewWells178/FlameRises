@@ -56,10 +56,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void KBM_Jump()
-    {
-        Debug.Log("WeGOTHere");
-        Debug.Log(isGrounded());
-        Debug.Log("ShouldBeJumping");
+    {        
         if (Input.GetKeyDown("space") && isGrounded())
         {
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
