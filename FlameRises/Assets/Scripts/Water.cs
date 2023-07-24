@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    private float speed = 2f;
+    public float speed = 2f;
     private Rigidbody2D rb;
     private BoxCollider2D bc2;
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpForce = 30f;
 
     // Running Variables
-    public float runSpeed = 5f;
+    [SerializeField] private float runSpeed = 10f;
 
     // Wall jumping variables
     float wallJumpingDirection;
@@ -25,6 +27,14 @@ public class PlayerMovement : MonoBehaviour
     float wallJumpingCounter;
     float wallJumpingTime = .2f;
     Vector2 wallJumpingPower = new Vector2(12f, 24f);
+
+    public static event Action OnHeightReached;
+    public static event Action OnScoreIncreased;
+
+    // Position variables
+    private Vector3 pos;
+    private float y;
+    private float height;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +50,11 @@ public class PlayerMovement : MonoBehaviour
         KBM_Jump();
         KBM_WallSliding();
         KBM_WallJumping();
+    }
+
+    void FixedUpdate()
+    {
+        Move_Ten();
     }
 
     void KBM_Run()
@@ -69,6 +84,16 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, -.9f);           
         }        
+    }
+
+    void Move_Ten()
+    {
+        //Debug.Log(pos);
+        if(height >= 10f)
+        {
+            height -= 10f;
+            OnHeightReached?.Invoke();
+        }
     }
 
     

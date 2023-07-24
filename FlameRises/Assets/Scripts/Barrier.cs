@@ -11,7 +11,11 @@ public class Barrier : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(player.position);
+        Move_With_Player();
+    }
+
+    void Move_With_Player()
+    {
         v = player.position;
         y = v.y;
         v = transform.position;

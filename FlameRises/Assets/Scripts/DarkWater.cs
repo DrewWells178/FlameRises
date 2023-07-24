@@ -19,9 +19,7 @@ public class DarkWater : MonoBehaviour
        
     }
     private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        Debug.Log(hitInfo.tag);
-       
+    {  
         Platform platform = hitInfo.GetComponent<Platform>();
         if (platform != null)           
         {
