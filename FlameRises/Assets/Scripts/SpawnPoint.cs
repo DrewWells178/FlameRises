@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class SpawnPoint : MonoBehaviour
 {
@@ -10,8 +11,8 @@ public class SpawnPoint : MonoBehaviour
     public GameObject platform;
 
     void Start()
-    {
-        PlayerMovement.OnHeightReached += Spawn_Platform;
+    {       
+        Player.OnHeightReached += Spawn_Platform;
     }
 
     void Update()

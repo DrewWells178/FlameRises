@@ -21,15 +21,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 10f;
 
     // Wall jumping variables
-    float wallJumpingDirection;
-    bool isWallJumping;
-    float wallJumpingDuration = .3f;
+    float wallJumpingDirection; 
     float wallJumpingCounter;
     float wallJumpingTime = .2f;
     Vector2 wallJumpingPower = new Vector2(12f, 24f);
-
-    public static event Action OnHeightReached;
-    public static event Action OnScoreIncreased;
 
     // Position variables
     private Vector3 pos;
@@ -50,11 +45,6 @@ public class PlayerMovement : MonoBehaviour
         KBM_Jump();
         KBM_WallSliding();
         KBM_WallJumping();
-    }
-
-    void FixedUpdate()
-    {
-        Move_Ten();
     }
 
     void KBM_Run()
@@ -85,23 +75,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, -.9f);           
         }        
     }
-
-    void Move_Ten()
-    {
-        //Debug.Log(pos);
-        if(height >= 10f)
-        {
-            height -= 10f;
-            OnHeightReached?.Invoke();
-        }
-    }
-
-    
+          
     void KBM_WallJumping()
     {
         if(isSliding())
-        {
-            isWallJumping = false;
+        {            
             if(isWallLeft())
             {
                 wallJumpingDirection = 1f;
@@ -110,9 +88,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 wallJumpingDirection = -1f;
             }
-            wallJumpingCounter = wallJumpingTime;
-
-            CancelInvoke(nameof(StopWallJumping));
+            wallJumpingCounter = wallJumpingTime;            
         }
         else
         {
@@ -120,18 +96,10 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(Input.GetKeyDown("space") && wallJumpingCounter > 0f)
-        {
-            isWallJumping = true;
+        {            
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
-            wallJumpingCounter = 0f;
-
-            Invoke(nameof(StopWallJumping), wallJumpingDuration);
+            wallJumpingCounter = 0f;            
         }
-    }
-
-    private void StopWallJumping()
-    {
-        isWallJumping = false;
     }
 
     bool isGrounded()
