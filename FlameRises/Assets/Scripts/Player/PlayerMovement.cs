@@ -36,6 +36,21 @@ public class PlayerMovement : MonoBehaviour
     private float y;
     private float height;
 
+    // Ledge climb variables
+    [HideInInspector] public bool ledgeDetectedRight;
+    [HideInInspector] public bool ledgeDetectedLeft;
+    
+    [SerializeField] private Vector2 offset1R;
+    [SerializeField] private Vector2 offset1L;
+    [SerializeField] private Vector2 offset2R;
+    [SerializeField] private Vector2 offset2L;
+
+    private Vector2 climbBeginPos;
+    private Vector2 climbAfterPos;
+
+    private bool canGrabLedge = true;
+    private bool canClimb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +67,7 @@ public class PlayerMovement : MonoBehaviour
         KBM_Jump();
         KBM_WallSliding();
         KBM_WallJumping();
+        checkForLedge();
     }
 
     void KBM_Run()
@@ -129,6 +145,57 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void checkForLedge()
+    {
+        Debug.Log("ledge detected Right:" + ledgeDetectedRight);
+        Debug.Log("ledge detected Left:" + ledgeDetectedRight);
+        Debug.Log("can grab ledge: " + canGrabLedge);
+        if(ledgeDetectedRight)
+        {
+            canGrabLedge = false;
+
+                Vector2 ledgePosition = GetComponentInChildren<RightLedgeDetection>().transform.position;
+                climbBeginPos = ledgePosition + offset1R;
+                //climbAfterPos = ledgePosition + offset2R;
+
+                canClimb = true;
+            
+
+            if(canClimb)
+            {
+                transform.position = climbBeginPos;
+                rb.velocity = new Vector2(0f, 0f);
+                isJumping = false;
+                LedgeClimbOver();
+            } 
+        }
+        else if(ledgeDetectedLeft)
+        {
+            canGrabLedge = false;
+
+            Vector2 ledgePosition = GetComponentInChildren<LeftLedgeDetection>().transform.position;
+            climbBeginPos = ledgePosition + offset1L;
+            //climbAfterPos = ledgePosition + offset2L;
+
+            canClimb = true;
+
+            if(canClimb)
+            {
+                transform.position = climbBeginPos;
+                rb.velocity = new Vector2(0f, 0f);
+                isJumping = false;
+                LedgeClimbOver();
+            } 
+        }
+    }
+
+    private void LedgeClimbOver()
+    {
+        canClimb = false;
+        //transform.position = climbAfterPos;
+        canGrabLedge = true;
+    }
+
     bool isGrounded()
     {
         RaycastHit2D rayCastGroundCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size, 0f, Vector2.down, .12f, lm);
@@ -144,6 +211,18 @@ public class PlayerMovement : MonoBehaviour
     private bool isWallLeft()
     {
         RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.left, .3f, lm);
+        return rayCastWallCheck.collider != null;
+    }
+
+    private bool isLedgeRight()
+    {
+        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.right, 1f, lm);
+        return rayCastWallCheck.collider != null;
+    }
+
+    private bool isLedgeLeft()
+    {
+        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.left, 1f, lm);
         return rayCastWallCheck.collider != null;
     }
 
