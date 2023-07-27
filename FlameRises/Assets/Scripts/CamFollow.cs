@@ -11,6 +11,9 @@ public class CamFollow : MonoBehaviour
     private bool same;
     private Rigidbody2D rb;
 
+    private float fallTime = .5f;
+    private float isFalling;
+
     public float speed = 20f;
     
     // Start is called before the first frame update
@@ -30,33 +33,41 @@ public class CamFollow : MonoBehaviour
 
     void Move()
     {
+        Vector3 targetPos = transform.position;
         if(Rb.velocity.y < 0)
         { 
             // move down
-            Debug.Log("moving down");
-            rb.velocity = new Vector2(0, Rb.velocity.y - (.25f * speed));
-            Vector3 targetPos = transform.position;
+            isFalling += Time.deltaTime;
+            rb.velocity = new Vector2(0, Rb.velocity.y);
             targetPos.x = 0f;
-            targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, threshold + player.transform.position.y);
             this.transform.position = targetPos;
+            targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, 1.5f * threshold + player.transform.position.y);
+            
+            if(isFalling > fallTime)
+            {
+                Debug.Log("moving down");
+                rb.velocity = new Vector2(0, Rb.velocity.y - (5f * speed));
+                targetPos.x = 0f;
+                this.transform.position = targetPos;
+                targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, 1.5f * threshold + player.transform.position.y);
+            }
         }
         else if(Rb.velocity.y > 0)
         {
             // move up
-            Debug.Log("moving up");
+            isFalling = 0f;
             rb.velocity = new Vector2(0, Rb.velocity.y + speed);
-            Vector3 targetPos = transform.position;
             targetPos.x = 0f;
-            targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, threshold + player.transform.position.y);
+            targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, 1.5f * threshold + player.transform.position.y);
             this.transform.position = targetPos;
         }
         else
         {
-            Debug.Log("shits fucked gang gang");
+            isFalling = 0f;
             // move to player
             if(above)
             {
-                rb.velocity = new Vector2(0, -.5f * speed);
+                rb.velocity = new Vector2(0, -.1f * speed);
             }
             else if(same)
             {

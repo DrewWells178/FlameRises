@@ -15,10 +15,15 @@ public class PlayerMovement : MonoBehaviour
     float inputHorizontal;
 
     // Jumping Variables
-    private float jumpForce = 30f;
+    private float jumpForce = 18f;
 
     // Running Variables
     [SerializeField] private float runSpeed = 10f;
+
+    // Jumping Variables
+    private float jumpTime = .25f;
+    private float jumpTimer;
+    private bool isJumping;
 
     // Wall jumping variables
     float wallJumpingDirection; 
@@ -41,6 +46,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        rb.velocity = new Vector2(rb.velocity.x, Helper.Clamp(rb.velocity.y, -20f, 30f));
+
         KBM_Run();
         KBM_Jump();
         KBM_WallSliding();
@@ -62,9 +69,29 @@ public class PlayerMovement : MonoBehaviour
 
     void KBM_Jump()
     {        
-        if (Input.GetKeyDown("space") && isGrounded())
+        if(isGrounded() && Input.GetKeyDown("space"))
         {
-            rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            isJumping = true;
+            jumpTimer = 0f;
+            rb.velocity = new Vector2(rb.velocity.x, .7f * jumpForce);
+        }
+
+        if (Input.GetKey("space") && isJumping)
+        {
+            if(jumpTimer < jumpTime)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                jumpTimer += Time.deltaTime;
+            }
+            else
+            {
+                isJumping = false;
+            }
+        }
+
+        if(Input.GetKeyUp("space"))
+        {
+            isJumping = false;
         }
     }
 

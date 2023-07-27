@@ -539,7 +539,7 @@ MonoBehaviour:
   m_BindingMode: 1
   m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
-  m_YDamping: 3
+  m_YDamping: 1
   m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
@@ -1326,6 +1326,14 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.007572502
       objectReference: {fileID: 0}
+    - target: {fileID: 5188310922359794891, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+      propertyPath: m_GravityScale
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5188310922359794891, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7507605915720091828, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
       propertyPath: runSpeed
       value: 10
@@ -1678,6 +1686,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6739044886968629232, guid: 0d25df4672fb14c4e9f0e67062b5f954, type: 3}
   m_PrefabInstance: {fileID: 1040718204}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1921968007 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1762537958064920540, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+  m_PrefabInstance: {fileID: 1368993747}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1963780234
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1765,11 +1778,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4829367798449756219, guid: c0006fa6ee92f374eaa07eaf1cb20ee2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.44
       objectReference: {fileID: 0}
     - target: {fileID: 4829367798449756219, guid: c0006fa6ee92f374eaa07eaf1cb20ee2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 21.75
+      value: 17.94
       objectReference: {fileID: 0}
     - target: {fileID: 4829367798449756219, guid: c0006fa6ee92f374eaa07eaf1cb20ee2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1881,6 +1894,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCamFollow
       objectReference: {fileID: 0}
+    - target: {fileID: 6358594939323243302, guid: 5b4568a1960d4fd4da36b3fbca85b3b9, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1921968007}
     - target: {fileID: 6358594939323243303, guid: 5b4568a1960d4fd4da36b3fbca85b3b9, type: 3}
       propertyPath: m_RootOrder
       value: 26
