@@ -11,8 +11,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private int counter = 1;
 
-    public static event Action OnHeightReached;
-    
+       
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +42,7 @@ public class Player : MonoBehaviour
     {
         if((score % 10 == 0) && score / 10 == counter) 
         {     
-            counter++;
-            OnHeightReached?.Invoke();            
+            counter++;                       
         }
     }
 }

@@ -12,7 +12,7 @@ public class SpawnPoint : MonoBehaviour
 
     void Start()
     {       
-        Player.OnHeightReached += Spawn_Platform;
+        PlatformManager.OnHeightReached += Spawn_Platform;
     }
 
     void Update()
