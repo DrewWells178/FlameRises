@@ -10,6 +10,8 @@ public class PlatformManager : MonoBehaviour
 
     private int counter;
 
+    private bool isBuilding = false;
+
     public static event Action OnHeightReached;
     // Start is called before the first frame update
     void Start()
@@ -21,5 +23,22 @@ public class PlatformManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void checkHeight()
+    {
+        if ((score % 10 == 0) && score / 10 == counter)
+        {
+            isBuilding = true;
+            counter++;
+        }
+    }
+
+    void buildPlatform()
+    {
+        if (isBuilding)
+        {
+            // Push event to platform spawner based on array of two classes of type and shape.
+        }
     }
 }
