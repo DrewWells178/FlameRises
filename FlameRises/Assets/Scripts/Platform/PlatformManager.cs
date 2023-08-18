@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Random = System.Random;
+using UnityEngine.Events;
 
 public class PlatformManager : MonoBehaviour
 {
     // Player height variables
     [SerializeField] private Player player;
-    private int counter;
+    private int counter = 1;
     private bool isBuilding = false;
 
     // Random
@@ -54,12 +55,12 @@ public class PlatformManager : MonoBehaviour
     }
 
     void checkHeight()
-    {
+    {        
         if ((player.score % spawnIncrement == 0) && player.score / spawnIncrement == counter)
         {
             isBuilding = true;
-            counter++;
-        }
+            counter++;            
+        }        
     }
 
     void buildPlatforms()
@@ -68,12 +69,13 @@ public class PlatformManager : MonoBehaviour
         {
             // reset the array
             reset();
-
+            
             // determine # if plats to spawn, which spawners spawn them, and the shape to be spawned
             getPlatCount();
             
             // Push event to platform spawner based on array of two classes of type and shape.
         }
+        isBuilding = false;
     }
 
     void getPlatCount()
@@ -96,8 +98,8 @@ public class PlatformManager : MonoBehaviour
                 }
                 j++;
             }
-        }
-        cycleCurrentCount++;
+        }        
+        cycleCurrentCount++;        
     }
 
     // reset the array
@@ -204,20 +206,16 @@ public class PlatformManager : MonoBehaviour
         return 0;
     }
 
-    void setPlatType()
+    void printData()
     {
-        for(int i = 0; i < numPlatSpawners; i++)
+        for (int i = 0; i < numPlatSpawners; i++)
         {
             for(int j = 0; j < maxPossiblePlatSpawned; j++)
             {
-                if(data[i,j].x != -1)
-                {
-                    // randomize the y value
-                    
-                }
+                Debug.Log(data[i,j].x);
+                Debug.Log(data[i,j].y);
             }
-        }
+        }       
     }
-
-
+    
 }

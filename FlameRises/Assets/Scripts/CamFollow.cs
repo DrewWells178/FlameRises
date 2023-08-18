@@ -44,8 +44,7 @@ public class CamFollow : MonoBehaviour
             targetPos.y = Helper.Clamp(targetPos.y, -threshold + player.transform.position.y, 1.5f * threshold + player.transform.position.y);
             
             if(isFalling > fallTime)
-            {
-                Debug.Log("moving down");
+            {                
                 rb.velocity = new Vector2(0, Rb.velocity.y - (5f * speed));
                 targetPos.x = 0f;
                 this.transform.position = targetPos;

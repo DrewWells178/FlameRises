@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     public int score = 0;
     public float height;
     private Rigidbody2D rb;
-    private int counter = 1;
+    
 
        
 
@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
+        score = 1;
     }
 
     // Update is called once per frame
@@ -30,19 +31,10 @@ public class Player : MonoBehaviour
         height = transform.position.y;
         if((int)height > score)
         {
-            score = (int)height;
-            isSpawnCheckpoint();           
+            score = (int)height;                      
         }
              
 
-    }
-
-    //This will be how we check if the score has increased enough to spawn platforms.
-    void isSpawnCheckpoint()
-    {
-        if((score % 10 == 0) && score / 10 == counter) 
-        {     
-            counter++;                       
-        }
-    }
+    } 
+ 
 }

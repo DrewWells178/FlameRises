@@ -148,9 +148,7 @@ public class PlayerMovement : MonoBehaviour
 
     void checkForLedge()
     {
-        Debug.Log("ledge detected Right:" + ledgeDetectedRight);
-        Debug.Log("ledge detected Left:" + ledgeDetectedRight);
-        Debug.Log("can grab ledge: " + canGrabLedge);
+      
         if(ledgeDetectedRight)
         {
             canGrabLedge = false;
