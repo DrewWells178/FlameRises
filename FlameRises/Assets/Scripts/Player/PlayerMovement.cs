@@ -85,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
     void KBM_Jump()
     {        
+        //  && Input.GetKeyDown("space")
         if(isGrounded() && Input.GetKeyDown("space"))
         {
             isJumping = true;
