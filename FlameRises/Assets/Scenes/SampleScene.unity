@@ -970,7 +970,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2116539940}
-  numPlatSpawners: 3
+  numPlatSpawners: 1
   minPlatformsSpawned: 3
   maxPossiblePlatSpawned: 8
   spawnIncrement: 20
@@ -1906,6 +1906,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 2116539936}
+    - target: {fileID: 4829367798449756164, guid: c0006fa6ee92f374eaa07eaf1cb20ee2, type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 617841073}
     - target: {fileID: 4829367798449756164, guid: c0006fa6ee92f374eaa07eaf1cb20ee2, type: 3}
       propertyPath: platform
       value: 

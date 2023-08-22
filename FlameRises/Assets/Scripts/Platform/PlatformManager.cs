@@ -20,10 +20,10 @@ public class PlatformManager : MonoBehaviour
     private int temp;
 
     // Events
-    public static event Action OnHeightReached;
+    public static event Action<Vector2[,]> OnHeightReached;   
 
     // Basic Parameters
-    public int numPlatSpawners = 3;
+    public int numPlatSpawners = 1;
     public int minPlatformsSpawned = 3;
     public int maxPossiblePlatSpawned = 8;
     public int spawnIncrement = 20;
@@ -72,8 +72,9 @@ public class PlatformManager : MonoBehaviour
             
             // determine # if plats to spawn, which spawners spawn them, and the shape to be spawned
             getPlatCount();
-            
+
             // Push event to platform spawner based on array of two classes of type and shape.
+            OnHeightReached?.Invoke(data);
         }
         isBuilding = false;
     }
