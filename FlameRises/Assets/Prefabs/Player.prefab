@@ -217,6 +217,7 @@ Transform:
   - {fileID: 8300874656524623103}
   - {fileID: 1096042566633633080}
   - {fileID: 328621086961582015}
+  - {fileID: 2115997445068926012}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -228,7 +229,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762537958064920540}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -271,7 +272,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 192
   runSpeed: 10
-  ledgeDetected: 0
+  ledgeDetectedRight: 0
+  ledgeDetectedLeft: 0
   offset1R: {x: 0, y: 0}
   offset1L: {x: 0, y: 0}
   offset2R: {x: 0, y: 0}
@@ -302,6 +304,57 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9871764, y: 1.0149264}
   m_EdgeRadius: 0
+--- !u!1 &2704118415081411462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2115997445068926012}
+  - component: {fileID: 2337621182017844870}
+  m_Layer: 0
+  m_Name: SpawnManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2115997445068926012
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2704118415081411462}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.44077298, y: 1.3418398, z: -0.054086305}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7938940678505664439}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2337621182017844870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2704118415081411462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4274589c0b66d3468344ee384d2e320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  numPlatSpawners: 3
+  minPlatformsSpawned: 3
+  maxPossiblePlatSpawned: 8
+  spawnIncrement: 10
+  upperBound: 0.66
+  lowerBound: 0.33
 --- !u!1 &7452564369811825775
 GameObject:
   m_ObjectHideFlags: 0

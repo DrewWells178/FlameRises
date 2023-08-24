@@ -17,8 +17,8 @@ public class SpawnPoint : MonoBehaviour
 
     // Random position variables.
     private Random rnd = new Random();
-    public float upperBound = 2f;
-    public float lowerBound = 2f;
+    public float upperBound = 3f;
+    public float lowerBound = 3f;
 
 
 
@@ -38,15 +38,13 @@ public class SpawnPoint : MonoBehaviour
         {
             if (data[spawnIndex, i].x != -1)
             {
-                //Spawn something
+                Instantiate(platform, Randomize_Position(), transform.rotation);
             }
             else
             {
-                //return;
+                return;
             }
         }
-        Debug.Log("we got here");
-        Instantiate(platform, Randomize_Position(), transform.rotation);
     }
 
     void Move_With_Player()
@@ -65,9 +63,9 @@ public class SpawnPoint : MonoBehaviour
         double scaled = (sample * range) + (double)(transform.position.x - lowerBound);
         float f = (float)scaled;
 
-        range = (double)(transform.position.x + upperBound) - (double)(transform.position.x - lowerBound);
+        range = (double)(transform.position.y + 2 * upperBound) - (double)(transform.position.y - 2 * lowerBound);
         sample = rnd.NextDouble();
-        scaled = (sample * range) + (double)(transform.position.x - lowerBound);
+        scaled = (sample * range) + (double)(transform.position.y - 2 *lowerBound);
         float g = (float)scaled;
 
         Vector3 v1 = new Vector3(f, g, 0);

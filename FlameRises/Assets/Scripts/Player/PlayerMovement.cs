@@ -148,7 +148,6 @@ public class PlayerMovement : MonoBehaviour
 
     void checkForLedge()
     {
-      
         if(ledgeDetectedRight)
         {
             canGrabLedge = false;
