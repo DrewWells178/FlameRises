@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : Surfaces
+public class Square : Surfaces
 {
-    
-    // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -19,7 +17,7 @@ public class Platform : Surfaces
     // Update is called once per frame
     void Update()
     {
-        if(isClose)
+        if (isClose)
         {
             movePlat();
         }
@@ -30,5 +28,4 @@ public class Platform : Surfaces
             this.enabled = false;
         }
     }
-    
 }

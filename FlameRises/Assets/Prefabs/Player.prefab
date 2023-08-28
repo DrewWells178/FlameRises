@@ -270,7 +270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lm:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 704
   runSpeed: 10
   ledgeDetectedRight: 0
   ledgeDetectedLeft: 0

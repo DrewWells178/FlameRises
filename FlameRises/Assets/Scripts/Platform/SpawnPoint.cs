@@ -11,6 +11,7 @@ public class SpawnPoint : MonoBehaviour
     Vector3 v;
     float y;
     public GameObject platform;
+    public GameObject square;
 
     
     public int spawnIndex;
@@ -38,7 +39,19 @@ public class SpawnPoint : MonoBehaviour
         {
             if (data[spawnIndex, i].x != -1)
             {
-                Instantiate(platform, Randomize_Position(), transform.rotation);
+                if (data[spawnIndex, i].x == 0) 
+                {
+                    Instantiate(platform, Randomize_Position(), transform.rotation);
+                }
+                else if(data[spawnIndex, i].x == 1)
+                {
+                    Instantiate(square, Randomize_Position(), transform.rotation);
+                }
+                else 
+                {
+                    Instantiate(platform, Randomize_Position(), transform.rotation);
+                }
+                
             }
             else
             {
