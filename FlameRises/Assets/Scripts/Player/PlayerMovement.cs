@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour
     float inputHorizontal;
 
     // Jumping Variables
-    private float jumpForce = 18f;
+    public float jumpForce = 18f;
 
     // Running Variables
     [SerializeField] private float runSpeed = 10f;

@@ -20,10 +20,10 @@ public class DarkWater : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D hitInfo)
     {  
-        Platform platform = hitInfo.GetComponent<Platform>();
-        if (platform != null)           
+        Surfaces surface = hitInfo.GetComponent<Surfaces>();
+        if (surface != null)           
         {
-            platform.Die();
+            surface.Die();
         }      
     }
    
