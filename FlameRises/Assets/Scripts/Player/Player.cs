@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
+    public TextMeshProUGUI currentScore;
 
     public int score = 0;
     public float height;
@@ -26,7 +29,7 @@ public class Player : MonoBehaviour
     {
         getScore();
         timeElapsed += Time.deltaTime;
-        Debug.Log(transform.position.y / timeElapsed);
+        //Debug.Log(transform.position.y / timeElapsed);
     }
 
     void getScore()
@@ -34,7 +37,8 @@ public class Player : MonoBehaviour
         height = transform.position.y;
         if((int)height > score)
         {
-            score = (int)height;                      
+            score = (int)height;   
+            currentScore.text = score.ToString();
         }
              
 

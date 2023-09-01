@@ -27,8 +27,8 @@ public class PlatformManager : MonoBehaviour
     public int minPlatformsSpawned = 3;
     public int maxPossiblePlatSpawned = 8;
     public int spawnIncrement = 20;
-    public float upperBound = .66f;
-    public float lowerBound = .33f;
+    public float upperBound = .8f;
+    public float lowerBound = .5f;
 
     private int cycleHeight = 200;
     private int cycleCurrentCount = 0;

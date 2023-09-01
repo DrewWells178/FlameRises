@@ -12,7 +12,9 @@ public class SpawnPoint : MonoBehaviour
     float y;
     public GameObject platform;
     public GameObject square;
+    public GameObject LSurface;
 
+    public float playerSeperation = 10f;
     
     public int spawnIndex;
 
@@ -47,11 +49,10 @@ public class SpawnPoint : MonoBehaviour
                 {
                     Instantiate(square, Randomize_Position(), transform.rotation);
                 }
-                else 
+                else
                 {
-                    Instantiate(platform, Randomize_Position(), transform.rotation);
+                    Instantiate(LSurface, Randomize_Position(), transform.rotation);
                 }
-                
             }
             else
             {
@@ -65,7 +66,7 @@ public class SpawnPoint : MonoBehaviour
         v = player.position;
         y = v.y;
         v = transform.position;
-        v.y = y + 20f;
+        v.y = y + playerSeperation;
         transform.position = v;
     }
 
