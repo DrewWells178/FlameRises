@@ -111,7 +111,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153917969685960689}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.74, y: 0.31, z: 0}
+  m_LocalPosition: {x: 0.729, y: 0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130,11 +130,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d106ecbdc40c38645ab2ef4cd89d9f52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0.25
+  radius: 0.2
   whatIsLedge:
     serializedVersion: 2
-    m_Bits: 0
-  player: {fileID: 0}
+    m_Bits: 576
+  player: {fileID: 7507605915720091828}
 --- !u!61 &28056964120011578
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.3831846, y: 0.5755858}
+  m_Offset: {x: 0.105822355, y: 0.4788345}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.3512212, y: 0.4435631}
+  m_Size: {x: 1.4127679, y: 0.42323828}
   m_EdgeRadius: 0
 --- !u!50 &6828041935156242164
 Rigidbody2D:
@@ -229,14 +229,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762537958064920540}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 7
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -254,6 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 818d5a609040aed47b9d5c8ff62ce51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentScore: {fileID: 0}
   score: 0
   height: 0
 --- !u!114 &7507605915720091828
@@ -271,13 +272,14 @@ MonoBehaviour:
   lm:
     serializedVersion: 2
     m_Bits: 704
+  jumpForce: 18
   runSpeed: 10
   ledgeDetectedRight: 0
   ledgeDetectedLeft: 0
-  offset1R: {x: 0, y: 0}
-  offset1L: {x: 0, y: 0}
-  offset2R: {x: 0, y: 0}
-  offset2L: {x: 0, y: 0}
+  offset1R: {x: 0.58, y: 0.5}
+  offset1L: {x: -0.5, y: 0.31}
+  offset2R: {x: 0.69, y: 1.46}
+  offset2L: {x: -0.31, y: 0.55}
 --- !u!61 &1902582898080829760
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -348,13 +350,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4274589c0b66d3468344ee384d2e320, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 6494123331083975889}
   numPlatSpawners: 3
   minPlatformsSpawned: 3
-  maxPossiblePlatSpawned: 8
-  spawnIncrement: 10
-  upperBound: 0.66
-  lowerBound: 0.33
+  maxPossiblePlatSpawned: 7
+  spawnIncrement: 8
+  upperBound: 0.95
+  lowerBound: 0.6
 --- !u!1 &7452564369811825775
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7452564369811825775}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.03, y: 0.28, z: 0}
+  m_LocalPosition: {x: -0.749, y: 0.285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -401,11 +403,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7de1a49f839d44790f01b6c26e8e38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
+  radius: 0.2
   whatIsLedge:
     serializedVersion: 2
-    m_Bits: 0
-  player: {fileID: 0}
+    m_Bits: 576
+  player: {fileID: 7507605915720091828}
 --- !u!50 &5199670493370480588
 Rigidbody2D:
   serializedVersion: 4
@@ -414,7 +416,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7452564369811825775}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -425,7 +427,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &8071536447680306796
 BoxCollider2D:
@@ -437,10 +439,10 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.32300234, y: 0.52808297}
+  m_Offset: {x: -0.086619765, y: 0.46836877}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -451,5 +453,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6460047, y: 0.37450337}
+  m_Size: {x: 1.5070832, y: 0.3933947}
   m_EdgeRadius: 0

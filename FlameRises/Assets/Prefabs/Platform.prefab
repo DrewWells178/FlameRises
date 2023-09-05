@@ -75,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lm:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 704
   rb: {fileID: 0}
   bc2: {fileID: 0}
   posUp: {x: 0, y: 0, z: 0}

@@ -18,13 +18,13 @@ public class LeftLedgeDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("World"))
+        if ((collision.gameObject.layer == LayerMask.NameToLayer("World")) || (collision.gameObject.layer == LayerMask.NameToLayer("Surfaces")))
             canDetect = false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("World"))
+        if ((collision.gameObject.layer == LayerMask.NameToLayer("World")) || (collision.gameObject.layer == LayerMask.NameToLayer("Surfaces")))
             canDetect = true;
     }
 
