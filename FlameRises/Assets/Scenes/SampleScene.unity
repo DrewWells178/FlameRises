@@ -1507,6 +1507,26 @@ PrefabInstance:
       propertyPath: speed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2116539940}
+    - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: baseSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: speedChange
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: speedIncrement
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: playerSpeedModifier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5269152798567918930, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
       propertyPath: m_RootOrder
       value: 6

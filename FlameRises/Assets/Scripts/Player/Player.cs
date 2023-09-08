@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
 
     private float timeElapsed = 0f;
+    public float speed;
        
 
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     {
         getScore();
         timeElapsed += Time.deltaTime;
+        speed = transform.position.y / timeElapsed;
         //Debug.Log(transform.position.y / timeElapsed);
     }
 

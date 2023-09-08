@@ -4,9 +4,24 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
-    public float speed = 2f;
+    public float baseSpeed = 2f;
     private Rigidbody2D rb;
     private BoxCollider2D bc2;
+    public float speed;
+    public int counter = 1;
+    //player based speed variable
+    // height based speed variable
+    // need a counter of height
+
+    //height speed variables
+    public int speedIncrement;
+    private int speedCounter = 1;
+    public Player player;
+    public float speedChange;
+
+    //Player based speed modifier
+    public float playerSpeedModifier;
+
 
     void Start()
     {
@@ -16,7 +31,9 @@ public class Water : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+        calcSpeed();
+        speed = baseSpeed + (player.speed * playerSpeedModifier) + speedChange;
         rb.velocity = new Vector2(rb.velocity.x, speed);
     }
     /*private void OnTriggerEnter2D(Collider2D hitInfo)
@@ -32,4 +49,16 @@ public class Water : MonoBehaviour
        
     }
     */
+
+    void calcSpeed()
+    {
+        
+        if ((player.score % speedIncrement == 0) && player.score / speedIncrement == counter)
+        {
+            
+            speedChange += speedChange / (float)counter;
+            counter++;
+        }
+                
+    }
 }
