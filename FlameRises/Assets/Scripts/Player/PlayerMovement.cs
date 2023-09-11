@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D bc2;
     [SerializeField] LayerMask lm;
+    [SerializeField] LayerMask climbingLayer;
 
     // Player input variables
     float inputHorizontal;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 18f;
 
     // Running Variables
-    [SerializeField] private float runSpeed = 10f;
+    [SerializeField] private float runSpeed = 13f;
 
     // Jumping Variables
     private float jumpTime = .25f;
@@ -28,8 +29,11 @@ public class PlayerMovement : MonoBehaviour
     // Wall jumping variables
     float wallJumpingDirection; 
     float wallJumpingCounter;
-    float wallJumpingTime = .2f;
-    Vector2 wallJumpingPower = new Vector2(12f, 24f);
+    float wallJumpingTime = .5f;
+    private Vector2 wallJumpingPower = new Vector2(13f, 20f);
+
+    float cantRunTimer = 0f;
+    float cantRunTime = .1f;
 
     // Position variables
     private Vector3 pos;
@@ -62,8 +66,12 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         rb.velocity = new Vector2(rb.velocity.x, Helper.Clamp(rb.velocity.y, -20f, 30f));
-
-        KBM_Run();
+        
+        cantRunTimer -= Time.deltaTime;
+        if(cantRunTimer <= 0)
+        {
+            KBM_Run();
+        }
         KBM_Jump();
         KBM_WallSliding();
         KBM_WallJumping();
@@ -122,14 +130,16 @@ public class PlayerMovement : MonoBehaviour
           
     void KBM_WallJumping()
     {
-        if(isSliding())
+        if(isSliding() && !isGrounded())
         {            
             if(isWallLeft())
             {
+                inputHorizontal = 1f;
                 wallJumpingDirection = 1f;
             }
             else
             {
+                inputHorizontal = -1f;
                 wallJumpingDirection = -1f;
             }
             wallJumpingCounter = wallJumpingTime;            
@@ -142,7 +152,8 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyDown("space") && wallJumpingCounter > 0f)
         {            
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
-            wallJumpingCounter = 0f;            
+            wallJumpingCounter = 0f;    
+            cantRunTimer = cantRunTime;        
         }
     }
 
@@ -161,6 +172,7 @@ public class PlayerMovement : MonoBehaviour
 
             if(canClimb)
             {
+                // start animation
                 transform.position = climbBeginPos;
                 rb.velocity = new Vector2(0f, 0f);
                 isJumping = false;
@@ -214,13 +226,13 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isLedgeRight()
     {
-        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.right, 1f, lm);
+        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.right, 1f, climbingLayer);
         return rayCastWallCheck.collider != null;
     }
 
     private bool isLedgeLeft()
     {
-        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.left, 1f, lm);
+        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .7f, 0f, Vector2.left, 1f, climbingLayer);
         return rayCastWallCheck.collider != null;
     }
 
