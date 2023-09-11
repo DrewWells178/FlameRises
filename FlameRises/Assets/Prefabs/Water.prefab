@@ -130,7 +130,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.018055916, y: 0}
@@ -158,6 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c35b89580d20064390541fd3c166553, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseSpeed: 1
+  speed: 0
+  counter: 1
+  speedIncrement: 20
+  player: {fileID: 6494123331083975889, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+  speedChange: 0.1
+  playerSpeedModifier: 0.2
 --- !u!50 &1295909189290441015
 Rigidbody2D:
   serializedVersion: 4

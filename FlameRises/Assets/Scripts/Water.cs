@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Water : MonoBehaviour
 {
+    //public Static Helper helper;
     public float baseSpeed = 2f;
     private Rigidbody2D rb;
     private BoxCollider2D bc2;
@@ -34,21 +35,21 @@ public class Water : MonoBehaviour
     {   
         calcSpeed();
         speed = baseSpeed + (player.speed * playerSpeedModifier) + speedChange;
-        rb.velocity = new Vector2(rb.velocity.x, speed);
+        rb.velocity = new Vector2(rb.velocity.x, Helper.Clamp(speed, 0f, 3f));        
     }
-    /*private void OnTriggerEnter2D(Collider2D hitInfo)
+    private void OnTriggerEnter2D(Collider2D hitInfo)
     {
         Debug.Log(hitInfo.name);
        
-            PlayerScript player = hitInfo.GetComponent<PlayerScript>();
+            Player player = hitInfo.GetComponent<Player>();
             if (player != null)           
             {
-                player.TakeDamage(damage);
+                player.Die();
             }          
         // Also destroy other game objects: platforms, powerups. Not walls or barriers. Way of cleaning up game memory.
        
     }
-    */
+    
 
     void calcSpeed()
     {

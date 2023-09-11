@@ -1525,7 +1525,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5269152798567918928, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
       propertyPath: playerSpeedModifier
-      value: 0
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5269152798567918929, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5269152798567918930, guid: acffdb7ca65e08b419c307b566c808ea, type: 3}
       propertyPath: m_RootOrder

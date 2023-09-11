@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70dea6705f1d71f43b758832c06bee72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  player: {fileID: 1762537958064920540, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
   threshold: 5
   speed: 5
 --- !u!50 &6358594939323243301

@@ -45,12 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2608f087dfae1c4e9a662cee7db762d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  manager: {fileID: 0}
-  platform: {fileID: 0}
-  spawnIndex: 0
-  upperBound: 2
-  lowerBound: 2
+  player: {fileID: 7938940678505664439, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+  manager: {fileID: 6917680343311524695, guid: e938d4abf0af12741a0cc42306f0a1cc, type: 3}
+  platform: {fileID: 6739044886968629232, guid: 0d25df4672fb14c4e9f0e67062b5f954, type: 3}
+  square: {fileID: 2937184536674800512, guid: 7a9d2a6651aa72e4ba00dcb145ec8b24, type: 3}
+  LSurface: {fileID: 5451015707202072535, guid: fddc63ffb4676b8478132ba7fbaff122, type: 3}
+  playerSeperation: 20
+  spawnIndex: 1
+  upperBound: 2.5
+  lowerBound: 2.5
 --- !u!1 &8146266680672153577
 GameObject:
   m_ObjectHideFlags: 0

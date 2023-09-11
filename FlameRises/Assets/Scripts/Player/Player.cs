@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class Player : MonoBehaviour
 
     private float timeElapsed = 0f;
     public float speed;
+
+    private string mainMenu = "MainMenu";
        
 
     // Start is called before the first frame update
@@ -45,5 +48,10 @@ public class Player : MonoBehaviour
              
 
     } 
- 
+
+    public void Die()
+    {
+        SceneManager.LoadScene(mainMenu);        
+    }
+
 }
