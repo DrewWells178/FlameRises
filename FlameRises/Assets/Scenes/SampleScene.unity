@@ -1083,6 +1083,14 @@ PrefabInstance:
       propertyPath: currentScore
       value: 
       objectReference: {fileID: 1940087516}
+    - target: {fileID: 7507605915720091828, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+      propertyPath: lm.m_Bits
+      value: 1728
+      objectReference: {fileID: 0}
+    - target: {fileID: 7507605915720091828, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
+      propertyPath: climbingLayer.m_Bits
+      value: 192
+      objectReference: {fileID: 0}
     - target: {fileID: 7938940678505664439, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
       propertyPath: m_RootOrder
       value: 1

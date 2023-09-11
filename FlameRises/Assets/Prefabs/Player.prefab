@@ -273,6 +273,9 @@ MonoBehaviour:
   lm:
     serializedVersion: 2
     m_Bits: 704
+  climbingLayer:
+    serializedVersion: 2
+    m_Bits: 192
   jumpForce: 18
   runSpeed: 10
   ledgeDetectedRight: 0
