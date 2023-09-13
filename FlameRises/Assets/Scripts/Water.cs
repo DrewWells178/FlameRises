@@ -22,6 +22,7 @@ public class Water : MonoBehaviour
 
     //Player based speed modifier
     public float playerSpeedModifier;
+    public float testingModifier;
 
 
     void Start()
@@ -34,7 +35,7 @@ public class Water : MonoBehaviour
     void Update()
     {   
         calcSpeed();
-        speed = baseSpeed + (player.speed * playerSpeedModifier) + speedChange;
+        speed = (baseSpeed + (player.speed * playerSpeedModifier) + speedChange) * testingModifier;
         rb.velocity = new Vector2(rb.velocity.x, Helper.Clamp(speed, 0f, 3f));        
     }
     private void OnTriggerEnter2D(Collider2D hitInfo)

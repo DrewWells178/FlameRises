@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Surfaces : MonoBehaviour
 {
     [SerializeField] LayerMask lm;
     public Rigidbody2D rb;
     public BoxCollider2D bc2;
+    public float radius = 2f;
 
     public Vector3 posUp;
     public Vector3 posDown;
@@ -14,7 +16,7 @@ public class Surfaces : MonoBehaviour
 
     [SerializeField] public float moveSpeed = 4f;
 
-    public bool isClose = false;
+    public bool isClose;
 
     // Start is called before the first frame update
     void Start()
@@ -22,23 +24,26 @@ public class Surfaces : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc2 = transform.GetComponent<BoxCollider2D>();
 
-        isClose = checkPlatforms();
+        checkPlatforms();
         this.enabled = true;
         rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * 0f;
     }
 
     // Update is called once per frame
-    void Update()
+
+    public void Begin()
     {
-        if (isClose)
+        if(!isClose)
         {
-            movePlat();
+            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * 0f;
+            rb.isKinematic = true;
+            //this.enabled = false;
         }
         else
         {
-            Debug.Log("Kinematic right away");
-            rb.isKinematic = true;
-            this.enabled = false;
+            checkPlatforms();
+            //SurfaceClose();
+            //Move();
         }
     }
 
@@ -49,75 +54,67 @@ public class Surfaces : MonoBehaviour
         Destroy(gameObject);
     }
 
-
-    public void movePlat()
+    public void checkPlatforms()
     {
-        if (isPlatUp() && isPlatDown())
+        bool check = false;
+        List<Collider2D> hitColliders = Physics2D.OverlapCircleAll(transform.position, radius).ToList();
+        
+        if(hitColliders.Contains(bc2))
         {
-            moveDirection = (transform.position - posUp) + (transform.position - posDown);
-            moveDirection = moveDirection.normalized;
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
+            hitColliders.Remove(bc2);
         }
-        else if (isPlatUp())
+
+        if(!hitColliders.Any())
         {
-            moveDirection = transform.position - posUp;
-            moveDirection = moveDirection.normalized;
-            //Debug.Log(transform.position);
-            //Debug.Log(posUp);
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
-        }
-        else if (isPlatDown())
-        {
-            moveDirection = transform.position - posDown;
-            moveDirection = moveDirection.normalized;
-            rb.velocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
-        }
-        else
-        {
-            rb.velocity = new Vector2(0, 0);
             isClose = false;
         }
+        
+        foreach (var hitCollider in hitColliders)
+        {
+            if(hitCollider.tag == "Platform" && hitCollider.tag != "Player" && hitCollider.tag != "Barrier")
+            {
+                Surfaces surface = hitCollider.GetComponent<Surfaces>();
+                if(surface != null)
+                {
+                    surface.Move(transform.position);
+                    isClose = true;
+                    check = true;
+                }
+            }
+
+            if(!check)
+            {
+                isClose = false;
+            }
+        }
     }
 
-    public bool checkPlatforms()
+    /*
+    public void SurfaceClose()
     {
-        if (isPlatUp() || isPlatDown())
+        var hitColliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        foreach (var hitCollider in hitColliders)
         {
-            return true;
+            Surfaces surface = hitCollider.GetComponent<Surfaces>();
+            if(surface != null)
+            {
+                //moveDirection += (transform.position - surface.transform.position);// move vector (of normalized vectors of other platforms)
+            }
         }
-        else
+        if(moveDirection == new Vector3(0f,0f,0f))
         {
-            return false;
+            //moveDirection = new Vector2(transform.position.x, transform.position.y);
         }
+        //moveDirection = moveDirection.normalized;
+        checkPlatforms();
     }
+    */
 
-
-    public bool isPlatUp()
+    public void Move(Vector3 v)
     {
-        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .2f, 0f, Vector2.up, 3f, lm);
-        if (rayCastWallCheck.collider != null)
-        {
-            posUp = rayCastWallCheck.transform.position;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        v = transform.position - v;
+        v = v.normalized;
+        rb.velocity = new Vector2(v.x, v.y) * moveSpeed;
+        //moveSpeed  = moveSpeed * .5f;
     }
-
-    public bool isPlatDown()
-    {
-        RaycastHit2D rayCastWallCheck = Physics2D.BoxCast(bc2.bounds.center, bc2.bounds.size * .2f, 0f, Vector2.down, 3f, lm);
-        if (rayCastWallCheck.collider != null)
-        {
-            posDown = rayCastWallCheck.transform.position;
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
 }

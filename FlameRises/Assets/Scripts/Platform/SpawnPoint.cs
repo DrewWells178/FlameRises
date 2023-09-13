@@ -23,11 +23,19 @@ public class SpawnPoint : MonoBehaviour
     public float upperBound = 3f;
     public float lowerBound = 3f;
 
+    void OnEnable()
+    {
+        PlatformManager.OnHeightReached += Spawn_Platform;
+    }
 
+    void OnDisable()
+    {
+        PlatformManager.OnHeightReached -= Spawn_Platform;
+    }
 
     void Start()
     {       
-        PlatformManager.OnHeightReached += Spawn_Platform;        
+        //PlatformManager.OnHeightReached += Spawn_Platform;        
     }
 
     void Update()

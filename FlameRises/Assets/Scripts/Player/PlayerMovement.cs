@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D bc2;
     [SerializeField] LayerMask lm;
     [SerializeField] LayerMask climbingLayer;
+    public EnergyBar energyBar;
 
     // Player input variables
     float inputHorizontal;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     // Jumping Variables
     private float jumpTime = .25f;
+    int jumpCount = 2;
     private float jumpTimer;
     private bool isJumping;
 
@@ -55,11 +57,22 @@ public class PlayerMovement : MonoBehaviour
     private bool canGrabLedge = true;
     private bool canClimb;
 
+    // Flight Variables
+    public float flightForce = .15f;
+    private int flightEnergy = 3;
+    private float flightWait = .4f;
+    public float flightSpeed = 18f;
+    [SerializeField] private float flightDelay;
+    private int energy;
+    [SerializeField] private int maxEnergy = 200;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
         bc2 = transform.GetComponent<BoxCollider2D>();
+        energy = maxEnergy;
+        energyBar.SetMaxEnergy(maxEnergy);
     }
 
     // Update is called once per frame
@@ -76,6 +89,17 @@ public class PlayerMovement : MonoBehaviour
         KBM_WallSliding();
         KBM_WallJumping();
         checkForLedge();
+        //KBM_Flight();
+        flightWait -= Time.deltaTime;
+    }
+
+    void FixedUpdate()
+    {
+        if(energy < maxEnergy)
+        {
+            energy += 1;
+            energyBar.SetEnergy(energy);
+        }
     }
 
     void KBM_Run()
@@ -96,11 +120,21 @@ public class PlayerMovement : MonoBehaviour
         //  && Input.GetKeyDown("space")
         if(isGrounded() && Input.GetKeyDown("space"))
         {
+            //flightWait = flightDelay;
             isJumping = true;
             jumpTimer = 0f;
-            rb.velocity = new Vector2(rb.velocity.x, .7f * jumpForce);
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpCount = 1;
         }
-
+        else if(Input.GetKeyDown("space") && jumpCount > 0)
+        {
+            //flightWait = flightDelay;
+            isJumping = true;
+            jumpTimer = .125f;
+            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            jumpCount = 0;
+        }
+        
         if (Input.GetKey("space") && isJumping)
         {
             if(jumpTimer < jumpTime)
@@ -117,6 +151,20 @@ public class PlayerMovement : MonoBehaviour
         if(Input.GetKeyUp("space"))
         {
             isJumping = false;
+        }
+        
+    }
+
+    void KBM_Flight()
+    {
+        if(Input.GetKey("space") && !isGrounded() && !isWallLeft() && !isWallRight() && energy > flightEnergy && flightWait <= 0)
+        {
+            // Do Flight (Apply Force up)
+            rb.AddForce(Vector2.up * flightForce, ForceMode2D.Impulse);
+            //rb.velocity = new Vector2(rb.velocity.x, flightSpeed);
+            energy -= flightEnergy;
+            energyBar.SetEnergy(energy);
+            Debug.Log(energy);
         }
     }
 
@@ -150,10 +198,12 @@ public class PlayerMovement : MonoBehaviour
         }
 
         if(Input.GetKeyDown("space") && wallJumpingCounter > 0f)
-        {            
+        {       
+            jumpCount = 1;     
             rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;    
-            cantRunTimer = cantRunTime;        
+            cantRunTimer = cantRunTime;   
+            flightWait = flightDelay;   
         }
     }
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 7938940678505664439, guid: 6df3952465d496644a1b41fb45ee1eae, type: 3}
   manager: {fileID: 6917680343311524695, guid: e938d4abf0af12741a0cc42306f0a1cc, type: 3}
-  platform: {fileID: 6739044886968629232, guid: 0d25df4672fb14c4e9f0e67062b5f954, type: 3}
+  platform: {fileID: 3780831395606632643, guid: 030f2f2b4be11294fb5121cd91257d91, type: 3}
   square: {fileID: 2937184536674800512, guid: 7a9d2a6651aa72e4ba00dcb145ec8b24, type: 3}
   LSurface: {fileID: 5451015707202072535, guid: fddc63ffb4676b8478132ba7fbaff122, type: 3}
   playerSeperation: 20
